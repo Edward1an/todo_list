@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/main_menu.dart';
+import 'widgets/apps/main_menu.dart';
 
 void main() {
-  runApp(const MyWidget());
+  runApp(const ExampleWidget());
 }
