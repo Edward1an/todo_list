@@ -5,8 +5,7 @@ class ExampleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(child: Container()),
-    );
+    return const MaterialApp(
+        home: Scaffold(body: SafeArea(child: Text('ghghhg'))));
   }
 }
