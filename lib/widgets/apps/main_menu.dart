@@ -5,8 +5,8 @@ class ExampleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(child: Container()),
+    return MaterialApp(
+      home: SafeArea(child: Container()),
     );
   }
 }
