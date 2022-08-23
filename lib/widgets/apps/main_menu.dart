@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ExampleWidget extends StatelessWidget {
-  const ExampleWidget({Key? key}) : super(key: key);
+import '../groups/groups_widget.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        home: Scaffold(body: SafeArea(child: Text('ghghhg'))));
+    return MaterialApp(initialRoute: '/groups', routes: {
+      '/groups': (context) => GroupsWidget(),
+    });
   }
 }
