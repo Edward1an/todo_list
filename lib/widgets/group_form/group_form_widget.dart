@@ -8,7 +8,7 @@ class GroupsFormWidget extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: (() {}),
-        child: const Icon(Icons.save),
+        child: const Icon(Icons.done),
       ),
       appBar: AppBar(
         title: const Text('new group'),
