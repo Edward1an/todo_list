@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 
-class GroupsFormWidget extends StatelessWidget {
+class GroupsFormWidget extends StatefulWidget {
   const GroupsFormWidget({Key? key}) : super(key: key);
 
   @override
+  State<GroupsFormWidget> createState() => _GroupsFormWidgetState();
+}
+
+class _GroupsFormWidgetState extends State<GroupsFormWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const _GroupsNameWidgetBody();
+  }
+}
+
+class _GroupsNameWidgetBody extends StatelessWidget {
+  const _GroupsNameWidgetBody({Key? key}) : super(key: key);
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
