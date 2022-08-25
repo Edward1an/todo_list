@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/widgets/group_form/group_form_widget_model.dart';
 
 class GroupsFormWidget extends StatefulWidget {
   const GroupsFormWidget({Key? key}) : super(key: key);
@@ -8,20 +9,24 @@ class GroupsFormWidget extends StatefulWidget {
 }
 
 class _GroupsFormWidgetState extends State<GroupsFormWidget> {
+  final _model = GroupsFormWidgetModel();
   @override
   Widget build(BuildContext context) {
-    return const _GroupsNameWidgetBody();
+    return GroupsFormWidgetModelProvider(
+        model: _model, child: const _GroupsFormWidgetBody());
   }
 }
 
-class _GroupsNameWidgetBody extends StatelessWidget {
-  const _GroupsNameWidgetBody({Key? key}) : super(key: key);
-
- @override
+class _GroupsFormWidgetBody extends StatelessWidget {
+  const _GroupsFormWidgetBody({Key? key}) : super(key: key);
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (() {}),
+        tooltip: 'done',
+        onPressed: (() => GroupsFormWidgetModelProvider.watch(context)
+            ?.model
+            .saveGroup(context)),
         child: const Icon(Icons.done),
       ),
       appBar: AppBar(
@@ -41,10 +46,13 @@ class GroupsNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    final model = GroupsFormWidgetModelProvider.read(context)?.model;
+    return Center(
       child: TextField(
         autofocus: true,
-        decoration: InputDecoration(
+        onChanged: (value) => model?.groupName = value,
+        onEditingComplete: () => model?.saveGroup(context),
+        decoration: const InputDecoration(
             border: OutlineInputBorder(), hintText: 'Enter name'),
       ),
     );

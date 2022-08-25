@@ -1,66 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_list/widgets/groups/groups_widget_model.dart';
 
-class GroupsWidget extends StatelessWidget {
+class GroupsWidget extends StatefulWidget {
   const GroupsWidget({Key? key}) : super(key: key);
+
+  @override
+  State<GroupsWidget> createState() => _GroupsWidgetState();
+}
+
+class _GroupsWidgetState extends State<GroupsWidget> {
+  final model = GroupsWidgetModel();
+  @override
+  Widget build(BuildContext context) {
+    return GroupsWidgetModelProvider(
+      model: model,
+      child: const _GroupWidgetBody(),
+    );
+  }
+}
+
+class _GroupWidgetBody extends StatelessWidget {
+  const _GroupWidgetBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: (() =>
+            GroupsWidgetModelProvider.read(context)?.model.showFrom(context)),
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
         title: const Text('groups'),
       ),
-      body: const _GroupList(),
+      body: const _GroupListWidget(),
     );
   }
 }
 
-class _GroupList extends StatefulWidget {
-  const _GroupList({Key? key}) : super(key: key);
+class _GroupListWidget extends StatelessWidget {
+  const _GroupListWidget({Key? key}) : super(key: key);
 
-  @override
-  State<_GroupList> createState() => _GroupListState();
-}
-
-class _GroupListState extends State<_GroupList> {
   @override
   Widget build(BuildContext context) {
+    final groupCount =
+        GroupsWidgetModelProvider.watch(context)?.model.groups.length ?? 0;
     return ListView.separated(
-        itemBuilder: ((BuildContext context, int index) {
+        separatorBuilder: ((BuildContext context, int index) {
           return const Divider(height: 1);
         }),
-        separatorBuilder: (BuildContext context, int index) {
-          return _GroupRowWidget(
+        itemBuilder: (BuildContext context, int index) {
+          return _GroupListRowWidget(
             listIndex: index,
           );
         },
-        itemCount: 100);
+        itemCount: groupCount);
   }
 }
 
-class _GroupRowWidget extends StatelessWidget {
+class _GroupListRowWidget extends StatelessWidget {
   final int listIndex;
-  const _GroupRowWidget({
+  const _GroupListRowWidget({
     Key? key,
     required this.listIndex,
   }) : super(key: key);
 
-  void showFrom(BuildContext context) {
-    Navigator.of(context).pushNamed('/groups/form');
-  }
-
   @override
   Widget build(BuildContext context) {
+    final model = GroupsWidgetModelProvider.read(context)!.model;
+    final group = model.groups[listIndex];
     return Slidable(
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: ((context) {}),
+            onPressed: ((context) => model.deleteGroup(listIndex)),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -70,14 +85,9 @@ class _GroupRowWidget extends StatelessWidget {
       ),
       enabled: true,
       child: ListTile(
-        onTap: ((() => showFrom(context))),
-        leading: Image.asset(
-            '/Users/edwardian/flutter_code_projects/todo_list/images/hs_logo.png'),
-        title: const Text('Three-line ListTile'),
-        subtitle:
-            const Text('A sufficiently long subtitle warrants three lines.'),
+        onTap: () => model.deleteGroup(listIndex),
+        title: Text(group.name),
         trailing: const Icon(Icons.chevron_right),
-        isThreeLine: true,
       ),
     );
   }
