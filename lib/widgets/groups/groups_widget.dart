@@ -85,7 +85,7 @@ class _GroupListRowWidget extends StatelessWidget {
       ),
       enabled: true,
       child: ListTile(
-        onTap: () => model.deleteGroup(listIndex),
+        onTap: () {},
         title: Text(group.name),
         trailing: const Icon(Icons.chevron_right),
       ),
