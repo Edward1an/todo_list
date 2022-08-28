@@ -53,12 +53,8 @@ class GroupsWidgetModel extends ChangeNotifier {
 class GroupsWidgetModelProvider extends InheritedNotifier {
   final GroupsWidgetModel model;
   const GroupsWidgetModelProvider(
-      {super.key, required this.model, required this.child})
+      {super.key, required this.model, required Widget child})
       : super(child: child, notifier: model);
-
-  @override
-  // ignore: overridden_fields
-  final Widget child;
 
   static GroupsWidgetModelProvider? watch(BuildContext context) {
     return context

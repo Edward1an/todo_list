@@ -20,12 +20,8 @@ class GroupsFormWidgetModel {
 class GroupsFormWidgetModelProvider extends InheritedWidget {
   final GroupsFormWidgetModel model;
   const GroupsFormWidgetModelProvider(
-      {super.key, required this.model, required this.child})
+      {super.key, required this.model, required Widget child})
       : super(child: child);
-
-  @override
-  // ignore: overridden_fields
-  final Widget child;
 
   static GroupsFormWidgetModelProvider? watch(BuildContext context) {
     return context
