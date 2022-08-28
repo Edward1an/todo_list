@@ -12,6 +12,7 @@ class GroupsFormWidgetModel {
     final box = await Hive.openBox<Group>('group_box');
     final group = Group(name: groupName);
     await box.add(group);
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 }
@@ -23,6 +24,7 @@ class GroupsFormWidgetModelProvider extends InheritedWidget {
       : super(child: child);
 
   @override
+  // ignore: overridden_fields
   final Widget child;
 
   static GroupsFormWidgetModelProvider? watch(BuildContext context) {

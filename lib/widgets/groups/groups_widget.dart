@@ -28,7 +28,7 @@ class _GroupWidgetBody extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: (() =>
-            GroupsWidgetModelProvider.read(context)?.model.showFrom(context)),
+            GroupsWidgetModelProvider.read(context)?.model.showForm(context)),
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -85,7 +85,7 @@ class _GroupListRowWidget extends StatelessWidget {
       ),
       enabled: true,
       child: ListTile(
-        onTap: () {},
+        onTap: () => model.showTasks(context, listIndex),
         title: Text(group.name),
         trailing: const Icon(Icons.chevron_right),
       ),
