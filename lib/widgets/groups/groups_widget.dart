@@ -32,7 +32,7 @@ class _GroupWidgetBody extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: const Text('groups'),
+        title: const Text('Groups'),
       ),
       body: const _GroupListWidget(),
     );
