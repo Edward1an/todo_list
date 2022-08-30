@@ -36,11 +36,15 @@ class TaskWidgetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = TasksWidgetModelProvider.watch(context)?.model;
+    final taskName = model?.group?.name;
     return Scaffold(
-      appBar: AppBar(title: const Text('task')),
+      appBar: AppBar(title: Text('$taskName' '`s task')),
       body: const TaskWidgetBodyList(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          model?.showForm(context);
+        },
         child: const Icon(Icons.add),
       ),
     );
