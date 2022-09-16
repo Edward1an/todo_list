@@ -56,15 +56,17 @@ class TaskWidgetBodyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tasksCount =
+        TasksWidgetModelProvider.watch(context)?.model.tasks.length ?? 0;
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         return const SizedBox(
             height: 50,
             child: Center(
-              child: Text('1'),
+              child: Text('cdds'),
             ));
       },
-      itemCount: 20,
+      itemCount: tasksCount,
       separatorBuilder: (BuildContext context, int index) {
         return const Divider(
           height: 1,

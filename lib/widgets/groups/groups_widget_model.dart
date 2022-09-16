@@ -28,16 +28,19 @@ class GroupsWidgetModel extends ChangeNotifier {
     _setup();
   }
 
+  void _readGroupsFromHive(Box<Group> box) {
+    _groups = box.values.toList();
+    notifyListeners();
+  }
+
   void _setup() async {
     if (!Hive.isAdapterRegistered(1)) {
       Hive.registerAdapter(GroupAdapter());
     }
     final box = await Hive.openBox<Group>('group_box');
-    _groups = box.values.toList();
-    notifyListeners();
+    _readGroupsFromHive(box);
     box.listenable().addListener(() {
-      _groups = box.values.toList();
-      notifyListeners();
+      _readGroupsFromHive(box);
     });
   }
 
